@@ -1,0 +1,33 @@
+* {
+    font-family: tohoma;
+    font-size: 20px;
+}
+
+body {
+    background-color: lightblue;
+}
+
+h1 {
+    text-align: center;
+    font-size: 30px;
+}
+
+a {
+    color: blue;
+}
+
+div {
+    margin-bottom: 10px;
+}
+
+.search {
+    margin-top: 10px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    padding: 10px;
+}

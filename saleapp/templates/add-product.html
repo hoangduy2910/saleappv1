@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm sản phẩm</title>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div>
+        <h1>THÊM SẢN PHẨM</h1>
+        <form method="post">
+            <table>
+                <tr>
+                    <td>Tên sản phẩm</td>
+                    <td>
+                        <input type="text" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Mô tả sản phẩm</td>
+                    <td>
+                        <textarea></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Gía sản phẩm</td>
+                    <td>
+                        <input type="text" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Danh mục</td>
+                    <td>
+                        <select>
+                            <option value="1">Điện thoại di động</option>
+                            <option value="2">Máy tính bảng</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="submit">Thêm sản phẩm</button>
+                        <button type="reset">Nhập lại</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
