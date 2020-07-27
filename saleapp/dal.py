@@ -2,6 +2,7 @@ from saleapp import app
 import json
 import os
 
+
 def read_products(keyword=None, from_price=None, to_price=None):
     products = None
     with open(os.path.join(app.root_path, 'data/products.json'), encoding="utf-8") as f:
@@ -15,11 +16,14 @@ def read_products(keyword=None, from_price=None, to_price=None):
 
     return products
 
+
 def read_products_by_category_id(category_id):
     return [product for product in read_products() if product["category_id"] == category_id]
 
+
 def read_product_by_id(product_id):
     return [product for product in read_products() if product["id"] == product_id]
+
 
 def add_product(name, description, price, image, category_id):
     products = read_products()
@@ -33,6 +37,7 @@ def add_product(name, description, price, image, category_id):
     })
     return update_product_json(products)
 
+
 def update_product(product_id, name, description, price, image, category_id):
     products = read_products()
     for product in products:
@@ -44,6 +49,16 @@ def update_product(product_id, name, description, price, image, category_id):
             product["category_id"] = int(category_id)
             break
     return update_product_json(products)
+
+
+def delete_product(product_id):
+    products = read_products()
+    for index, product in enumerate(products):
+        if product["id"] == product_id:
+            del products[index]
+            break
+    return update_product_json(products)
+
 
 def update_product_json(products):
     try:

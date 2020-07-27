@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Sản phẩm</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <style>
         body {
             background-color: lightblue;
@@ -14,54 +13,73 @@
             margin-top: 20px;
         }
 
+        table {
+            margin: 0 auto;
+        }
+
         td {
             padding: 10px;
         }
     </style>
+    <script>
+        function deleteProduct(product_id) {
+            fetch('/api/product/' + product_id, {
+                method: "delete"
+            }).then(response => response.json())
+            .then(data => {
+                console.log(data);
+                var pro = document.getElementById(product_id);
+                pro.style.display = "none";
+            });
+        }
+    </script>
 </head>
 <body>
     <h1 class="text-center">QUẢN LÝ SẢN PHẨM</h1>
-    <div class="container">
-        <table border="1">
+    <div>
+        <table border="1" width="90%">
             <tr>
                 <td colspan="3">
-                    <h2>
+                    <h3>
                         <a href="{{ url_for('add_product') }}">Thêm sản phẩm</a>
-                    </h2>
+                    </h3>
                 </td>
                 <td colspan="2">
                      <form class="search">
-                        <div class="mb-1">
+                        <div class="mb-2">
                            <input type="text" name="keyword" placeholder="Nhập tên sản phẩm" />
                         </div>
-                        <div class="mb-1" style="float: left;">
+                        <div class="mb-2">
                             <input type="number" name="from_price" placeholder="Giá bắt đầu" />
                             <input type="number" name="to_price" placeholder="Giá kết thúc" />
                         </div>
-                        <button type="submit">Tìm kiếm</button>
+                        <button class="btn btn-outline-primary" type="submit">Tìm kiếm</button>
                     </form>
                 </td>
             </tr>
-               {% for product in products %}
-                    <tr>
-                        <td>
-                            <img width="120" src="{{ product.image }}" alt="{{ product.name }}">
-                        </td>
-                        <td>
-                            <h4>{{ product.name }}</h4>
-                        </td>
-                        <td>
-                            {{ product.description }}
-                        </td>
-                        <td>
-                            {{ "{:,}".format(product.price) }} VNĐ
-                        </td>
-                        <td cla>
-                            <a class="text-success" href="{{ url_for('update_product', product_id=product.id) }}">Cập nhật</a> |
-                            <a class="text-danger" href="#">Xóa</a>
-                        </td>
-                    </tr>
-                {% endfor %}
+            {% for product in products %}
+                <tr class="{% if request.args['product_id'] == product.id|string %}
+                                bg-warning
+                           {% endif %}"
+                    id="{{ product.id }}">
+                    <td>
+                        <img width="120" src="{{ product.image }}" alt="{{ product.name }}">
+                    </td>
+                    <td>
+                        <h4>{{ product.name }}</h4>
+                    </td>
+                    <td>
+                        {{ product.description }}
+                    </td>
+                    <td>
+                        {{ "{:,}".format(product.price) }} VNĐ
+                    </td>
+                    <td>
+                        <a href="{{ url_for('update_product', product_id=product.id) }}">Cập nhật</a> |
+                        <a href="javascript:0;" onclick="deleteProduct({{ product.id }})">Xóa</a>
+                    </td>
+                </tr>
+            {% endfor %}
         </table>
     </div>
 </body>

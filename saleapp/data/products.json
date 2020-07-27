@@ -38,13 +38,5 @@
         "price": 21900000,
         "image": "https://cdn.tgdd.vn/Products/Images/42/198150/oppo-find-x2-xanh-400x460-1-400x460.png",
         "category_id": 1
-    },
-    {
-        "id": 6,
-        "name": "Samsung Galaxy Tab S6",
-        "description": "Samsung, 128 GB",
-        "price": 19000000,
-        "image": "https://cdn.tgdd.vn/Products/Images/522/208870/samsung-galaxy-tab-s6-400x460.png",
-        "category_id": 2
     }
 ]
