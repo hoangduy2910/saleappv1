@@ -3,32 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>Sản phẩm</title>
-    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: lightblue;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        td {
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>QUẢN LÝ SẢN PHẨM</h1>
-    <div>
-        <a href="{{ url_for('add_product') }}">Thêm sản phẩm</a>
-        <form class="search">
-            <div>
-               <input type="text" name="keyword" placeholder="Nhập tên sản phẩm" />
-            </div>
-            <div>
-                <input type="number" name="from_price" placeholder="Giá bắt đầu" />
-                <input type="number" name="to_price" placeholder="Giá kết thúc" />
-            </div>
-            <button type="submit">Tìm kiếm</button>
-        </form>
-    </div>
-    <div>
-        <table border="1" width="100%">
+    <h1 class="text-center">QUẢN LÝ SẢN PHẨM</h1>
+    <div class="container">
+        <table border="1">
+            <tr>
+                <td colspan="3">
+                    <h2>
+                        <a href="{{ url_for('add_product') }}">Thêm sản phẩm</a>
+                    </h2>
+                </td>
+                <td colspan="2">
+                     <form class="search">
+                        <div class="mb-1">
+                           <input type="text" name="keyword" placeholder="Nhập tên sản phẩm" />
+                        </div>
+                        <div class="mb-1" style="float: left;">
+                            <input type="number" name="from_price" placeholder="Giá bắt đầu" />
+                            <input type="number" name="to_price" placeholder="Giá kết thúc" />
+                        </div>
+                        <button type="submit">Tìm kiếm</button>
+                    </form>
+                </td>
+            </tr>
                {% for product in products %}
                     <tr>
                         <td>
                             <img width="120" src="{{ product.image }}" alt="{{ product.name }}">
                         </td>
                         <td>
-                            <h1>{{ product.name }}</h1>
+                            <h4>{{ product.name }}</h4>
                         </td>
                         <td>
                             {{ product.description }}
@@ -36,9 +56,9 @@
                         <td>
                             {{ "{:,}".format(product.price) }} VNĐ
                         </td>
-                        <td>
-                            <a href="#">Cập nhật</a> |
-                            <a href="#">Xóa</a>
+                        <td cla>
+                            <a class="text-success" href="{{ url_for('update_product', product_id=product.id) }}">Cập nhật</a> |
+                            <a class="text-danger" href="#">Xóa</a>
                         </td>
                     </tr>
                 {% endfor %}
