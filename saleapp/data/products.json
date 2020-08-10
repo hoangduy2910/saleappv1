@@ -30,13 +30,5 @@
         "price": 21000000,
         "image": "https://cdn.tgdd.vn/Products/Images/42/153856/iphone-11-red-2-400x460-400x460.png",
         "category_id": 1
-    },
-    {
-        "id": 5,
-        "name": "OPPO Find X2",
-        "description": "Oppo, 256GB",
-        "price": 21900000,
-        "image": "https://cdn.tgdd.vn/Products/Images/42/198150/oppo-find-x2-xanh-400x460-1-400x460.png",
-        "category_id": 1
     }
 ]

@@ -25,12 +25,13 @@
         function deleteProduct(product_id) {
             fetch('/api/product/' + product_id, {
                 method: "delete"
-            }).then(response => response.json())
-            .then(data => {
-                console.log(data);
-                var pro = document.getElementById(product_id);
-                pro.style.display = "none";
-            });
+            }).then(res => res.json())
+            .then(res => {
+                if (res.status == 200) {
+                    var pro = document.getElementById(product_id);
+                    pro.style.display = "none";
+                }
+            })
         }
     </script>
 </head>
@@ -42,6 +43,9 @@
                 <td colspan="3">
                     <h3>
                         <a href="{{ url_for('add_product') }}">Thêm sản phẩm</a>
+                    </h3>
+                    <h3>
+                        <a href="{{ url_for('export_products') }}">Xuất CSV sản phẩm</a>
                     </h3>
                 </td>
                 <td colspan="2">

@@ -1,6 +1,7 @@
 from saleapp import app
 import json
 import os
+import hashlib
 
 
 def read_products(keyword=None, from_price=None, to_price=None):
@@ -72,3 +73,37 @@ def update_product_json(products):
 def read_categories():
     with open(os.path.join(app.root_path, 'data/categories.json'), encoding="utf-8") as f:
         return json.load(f)
+
+
+def read_users():
+    with open(os.path.join(app.root_path, 'data/users.json'), encoding="utf-8") as f:
+        return json.load(f)
+
+
+def add_user(name, username, password):
+    users = read_users()
+    user = {
+        "id": len(users) + 1,
+        "name": name,
+        "username": username,
+        "password": str(hashlib.md5(password.encode("utf-8")).hexdigest())
+    }
+    users.append(user)
+
+    try:
+        with open(os.path.join(app.root_path, 'data/users.json'), "w", encoding="utf-8") as f:
+            json.dump(users, f, ensure_ascii=False, indent=4)
+        return True
+    except Exception as ex:
+        return False
+
+
+def check_login(username, password):
+    users = read_users()
+    password = str(hashlib.md5(password.encode("utf-8")).hexdigest())
+
+    for u in users:
+        if u["username"].strip() == username.strip() and u["password"] == password:
+            return u
+
+    return None
