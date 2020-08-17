@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Giỏ hàng</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <style>
+        body {
+            background-color: lightblue;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        table {
+            margin: 0 auto;
+        }
+
+        td {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="text-center">GIỎ HÀNG</h1>
+    <table border="1" width="90%">
+        <tr>
+            <td>Tên sản phẩm</td>
+            <td>Giá</td>
+            <td colspan="2">Số lượng</td>
+            <td colspan="2">Tổng tiền</td>
+        </tr>
+        {% for c in session["cart"].values() %}
+            <tr>
+                <td>{{ c.name }}</td>
+                <td>{{ "{:,}".format(c.price) }} VNĐ</td>
+                <td colspan="2">{{ c.quantity }}</td>
+                <td colspan="2">{{ "{:,}".format(c.price * c.quantity) }} VNĐ</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

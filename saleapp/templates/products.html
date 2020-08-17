@@ -33,6 +33,22 @@
                 }
             })
         }
+
+        function addToCart(id, name, price) {
+            fetch('/api/cart', {
+                body: JSON.stringify({
+                    "product_id": id,
+                    "name": name,
+                    "price": price
+                }),
+                method: "post",
+                headers: {'Content-Type': 'application/json'}
+            }).then(res => res.json())
+            .then(data => {
+                var cart = document.getElementById("cartId");
+                cart.innerText = `(${data.quantity})`;
+            })
+        }
     </script>
 </head>
 <body>
@@ -41,12 +57,16 @@
         <table border="1" width="90%">
             <tr>
                 <td colspan="3">
-                    <h3>
+                    <h4>
                         <a href="{{ url_for('add_product') }}">Thêm sản phẩm</a>
-                    </h3>
-                    <h3>
+                    </h4>
+                    <h4>
                         <a href="{{ url_for('export_products') }}">Xuất CSV sản phẩm</a>
-                    </h3>
+                    </h4>
+                    <h4>
+                        <a href="{{ url_for('cart') }}">Giỏ hàng</a>
+                        <span class="badge badge-primary" id="cartId">0</span>
+                    </h4>
                 </td>
                 <td colspan="2">
                      <form class="search">
@@ -79,6 +99,7 @@
                         {{ "{:,}".format(product.price) }} VNĐ
                     </td>
                     <td>
+                        <a href="javascript:0;" onclick="addToCart({{ product.id }}, '{{ product.name }}', {{ product.price }})">Thêm vào giỏ</a> |
                         <a href="{{ url_for('update_product', product_id=product.id) }}">Cập nhật</a> |
                         <a href="javascript:0;" onclick="deleteProduct({{ product.id }})">Xóa</a>
                     </td>
