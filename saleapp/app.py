@@ -4,13 +4,18 @@ from saleapp import app, dal, utils, decorator
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", products=dal.read_products(), categories=dal.read_categories())
 
 
 @app.route("/products")
 def products():
     keyword = request.args["keyword"] if request.args.get("keyword") else None
     return render_template("products.html", products=dal.read_products(keyword=keyword))
+
+
+@app.route("/products/detail/<int:product_id>")
+def detail_product(product_id):
+    return render_template("detail-product.html")
 
 
 @app.route("/products/<int:category_id>")
