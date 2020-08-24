@@ -148,7 +148,14 @@ def add_to_cart():
 
     session["cart"] = cart
 
-    return jsonify({"success": "1", "quantity": sum(c["quantity"] for c in list(session["cart"].values()))})
+    q = 0
+    s = 0
+
+    for c in list(session["cart"].values()):
+        q = q + c['quantity']
+        s = s + c['quantity'] * c['price']
+
+    return jsonify({"success": 1, "quantity": q, 'sum': s})
 
 
 @app.route("/cart")
@@ -157,4 +164,5 @@ def cart():
 
 
 if __name__ == "__main__":
+    from saleapp.admin import *
     app.run(debug=True)

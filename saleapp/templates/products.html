@@ -5,21 +5,6 @@
     <title>Sản phẩm</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <style>
-        body {
-            background-color: lightblue;
-        }
-
-        h1 {
-            margin-top: 20px;
-        }
-
-        table {
-            margin: 0 auto;
-        }
-
-        td {
-            padding: 10px;
-        }
     </style>
     <script>
         function deleteProduct(product_id) {
@@ -54,9 +39,9 @@
 <body>
     <h1 class="text-center">QUẢN LÝ SẢN PHẨM</h1>
     <div>
-        <table border="1" width="90%">
+        <table border="1" width="90%" style="margin: 0 auto;">
             <tr>
-                <td colspan="3">
+                <td colspan="3" style="padding: 10px;">
                     <h4>
                         <a href="{{ url_for('add_product') }}">Thêm sản phẩm</a>
                     </h4>
@@ -68,16 +53,16 @@
                         <span class="badge badge-primary" id="cartId">0</span>
                     </h4>
                 </td>
-                <td colspan="2">
+                <td colspan="2" style="padding: 10px;">
                      <form class="search">
-                        <div class="mb-2">
+                        <div class="mb-2" style="margin-bottom: 7px;">
                            <input type="text" name="keyword" placeholder="Nhập tên sản phẩm" />
                         </div>
-                        <div class="mb-2">
+                        <div class="mb-2" style="margin-bottom: 7px;">
                             <input type="number" name="from_price" placeholder="Giá bắt đầu" />
                             <input type="number" name="to_price" placeholder="Giá kết thúc" />
                         </div>
-                        <button class="btn btn-outline-primary" type="submit">Tìm kiếm</button>
+                        <button type="submit" style="margin-bottom: 7px;">Tìm kiếm</button>
                     </form>
                 </td>
             </tr>
@@ -87,7 +72,7 @@
                            {% endif %}"
                     id="{{ product.id }}">
                     <td>
-                        <img width="120" src="{{ product.image }}" alt="{{ product.name }}">
+                        <img width="120" src="{{ product.image }}" alt="{{ product.name }}" style="padding: 10px;">
                     </td>
                     <td>
                         <h4>{{ product.name }}</h4>

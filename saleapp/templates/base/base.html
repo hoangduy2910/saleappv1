@@ -110,11 +110,11 @@
                 <div class="navbar-collapse collapse">
                     {% block category %}
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="/">Trang chu</a></li>
+                        <li class="active"><a href="/">Trang chủ</a></li>
                         {% for cat in categories %}
                         <li><a href="{{ url_for('products_by_category_id', category_id=cat.id) }}">{{ cat.name }}</a></li>
                         {% endfor %}
-                        <li><a href="#">Lien he</a></li>
+                        <li><a href="#">Liên hệ</a></li>
                     </ul>
                     {% endblock %}
                 </div>
